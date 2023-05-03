@@ -11,7 +11,6 @@ app.MapControllerRoute(
 );
 
 app.MapControllerRoute(
-    //le nom de la route:explique ce que fait ceci:
     //le nom de la route est default et elle est utilisée par defaut si aucune route n'est trouvée. 
  name: "default",
  //la methode d'action et les parametres
