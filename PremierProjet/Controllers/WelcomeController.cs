@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PremierProjet.Models;
 using System;
+using System.Globalization;
 using System.Text.Json;
 
 namespace PremierProjet.Controllers
@@ -45,24 +46,25 @@ namespace PremierProjet.Controllers
             return File("~/cheatsheet-a5.pdf", "application/pdf");
             
         }
-        public ActionResult GenererListeClients()
+        public JsonResult GenererListeClients()
         {
             //create a list of clients with 5 mock clients
 
             Client client1 = new Client(1, "Pouliot", "Paul", "JP@courriel.com");
             Client client2 = new Client(2, "Girard ", "Jean", "GJ@courriel.com");
-            Client client3 = new Client(3, "Tremblay", "Marie", "MT@courriel.com");
-            Client client4 = new Client(4, "Lavoie", "Pierre ", "PL@courriel.com");
+            
 
-            List<Client> clients = new List<Client>();
-            clients.Add(client1);
-            clients.Add(client2);
-            clients.Add(client3);
-            clients.Add(client4);
+            List<Client> listeClients = new List<Client>();
+            listeClients.Add(client1);
+            listeClients.Add(client2);
+            
 
             //serialize in json
-            string json = JsonSerializer.Serialize(clients);
-            return Content(json, "application/json");
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            JsonResult listeClientsJson = Json(listeClients, options);
+            return listeClientsJson;
+           // string json = JsonSerializer.Serialize(clients);
+           // return Json(json, "application/json");
         }
        
     }
